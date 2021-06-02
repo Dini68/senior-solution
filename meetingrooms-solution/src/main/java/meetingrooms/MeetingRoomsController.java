@@ -23,6 +23,9 @@ public class MeetingRoomsController {
 
     private Scanner scanner = new Scanner(System.in);
 
+    private MeetingRoomsService meetingRoomsService =
+            new MeetingRoomsService(new inMemoryMeetingRoomsRepository());
+
     public static void main(String[] args) {
         new MeetingRoomsController().start();
     }
@@ -103,7 +106,9 @@ public class MeetingRoomsController {
             String name = getNameOfMeetingRoom(i);
             int width = getWidthOfMeetingRoom(i);
             int length = getLengthOfMeetingRoom(i);
+            meetingRoomsService.save(name, width, length);
         }
+        System.out.println(meetingRoomsService.meetingRooms());
     }
 
     private int getNumberOfMeetingRoom() {
