@@ -1,0 +1,1 @@
+create table meeting_rooms(id bigint not null auto_increment, room_name varchar(255), width int(2), length int(2), primary key (id));

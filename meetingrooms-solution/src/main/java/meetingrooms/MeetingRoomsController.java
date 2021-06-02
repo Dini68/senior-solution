@@ -23,8 +23,11 @@ public class MeetingRoomsController {
 
     private Scanner scanner = new Scanner(System.in);
 
+//    private MeetingRoomsService meetingRoomsService =
+//            new MeetingRoomsService(new InMemoryMeetingRoomsRepository());
+
     private MeetingRoomsService meetingRoomsService =
-            new MeetingRoomsService(new inMemoryMeetingRoomsRepository());
+            new MeetingRoomsService(new MariadbMeetingRoomsRepository());
 
     public static void main(String[] args) {
         new MeetingRoomsController().start();

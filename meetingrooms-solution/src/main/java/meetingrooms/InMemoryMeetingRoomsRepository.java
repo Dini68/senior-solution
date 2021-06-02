@@ -3,7 +3,7 @@ package meetingrooms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class inMemoryMeetingRoomsRepository implements MeetingRoomsRepository{
+public class InMemoryMeetingRoomsRepository implements MeetingRoomsRepository{
 
     private List<MeetingRoom> meetingRooms = new ArrayList<>();
 
