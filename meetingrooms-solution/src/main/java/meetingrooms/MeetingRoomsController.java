@@ -6,16 +6,20 @@ import java.util.Scanner;
 
 public class MeetingRoomsController {
 
-    public static final String MENU =
-            "0. Tárgyaló rögzítése\n" +
-            "1. Tárgyalók névsorrendben\n" +
-            "2. Tárgyalók név alapján visszafelé sorrendben\n" +
-            "3. Minden második tárgyaló\n" +
-            "4. Területek\n" +
-            "5. Keresés pontos név alapján\n" +
-            "6. Keresés névtöredék alapján\n" +
-            "7. Keresés terület alapján\n" +
-            "8. Kilépés";
+    private final static List<String> MENUS = new ArrayList<>(List.of(
+            "0. Tárgyaló rögzítése",
+            "1. Tárgyalók sorrendben",
+            "2. Tárgyalók visszafelé sorrendben",
+            "3. Minden második tárgyaló",
+            "4. Területek",
+            "5. Keresés pontos név alapján",
+            "6. Keresés névtöredék alapján",
+            "7. Keresés terület alapján",
+            "8. Kilépés"));
+
+    public static final int MIN_LENGTH_OF_MEETING_ROOM = 2;
+    public static final int MIN_WIDTH_OF_MEETING_ROOM = 2;
+    public static final int MIN_NUMBER_OF_MEETING_ROOMS = 1;
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -30,7 +34,9 @@ public class MeetingRoomsController {
 
     public void printMenu() {
         System.out.println("\n\t\t>>  Menü  <<");
-        System.out.println(MENU);
+        for (String s: MENUS) {
+            System.out.println(s);
+        }
     }
 
     public void runMenu() {
@@ -51,8 +57,146 @@ public class MeetingRoomsController {
     }
 
     private void implementMenuPoint(String menuNumberStr) {
+        int menuNumber = Integer.parseInt(menuNumberStr);
+        System.out.println("\t" + MENUS.get(menuNumber));
+        switch (menuNumberStr) {
+            case "0" : {
+                addMeetingRooms();                
+            }
+        }
+        
+        
+//            case "1" : {
+//                office.printNames();
+//                return;
+//            }
+//            case "2" : {
+//                office.printNamesReverse();
+//                return;
+//            }
+//            case "3" : {
+//                office.printEvenNames();
+//                return;
+//            }
+//            case "4" : {
+//                office.printAreas();
+//                return;
+//            }
+//            case "5" : {
+//                office.printMeetingRoomsWithName(getName());
+//                return;
+//            }
+//            case "6" : {
+//                office.printMeetingRoomsContains(getPart());
+//                return;
+//            }
+//            case "7" : {
+//                office.printAreasLargerThan(getArea());
+//                return;
+//            }
 
     }
+
+    private void addMeetingRooms() {
+        int number = getNumberOfMeetingRoom();
+        for (int i = 0; i < number; i++) {
+            String name = getNameOfMeetingRoom(i);
+            int width = getWidthOfMeetingRoom(i);
+            int length = getLengthOfMeetingRoom(i);
+        }
+    }
+
+    private int getNumberOfMeetingRoom() {
+        Integer numberOfMeetingRoom;
+        do {
+            System.out.print("Kérem a tárgyalók számát: ");
+            String numberStr = scanner.nextLine();
+            numberOfMeetingRoom = getNumber(numberStr);
+        } while (numberOfMeetingRoom == null || numberOfMeetingRoom < MIN_NUMBER_OF_MEETING_ROOMS);
+        return numberOfMeetingRoom;
+    }
+
+    private Integer getNumber(String numberStr) {
+        Integer numberOfMeetingRoom = null;
+        try {
+            numberOfMeetingRoom = Integer.parseInt(numberStr);
+            if (numberOfMeetingRoom < MIN_NUMBER_OF_MEETING_ROOMS) {
+                System.out.println("A tárgyalók száma nem lehet 1-nél kisebb: " + numberOfMeetingRoom);
+            }
+            return Integer.parseInt(numberStr);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Hiba, ez nem szám! '" + numberStr + "'");
+        }
+        return numberOfMeetingRoom;
+    }
+
+    private String getNameOfMeetingRoom(int i) {
+        String name;
+        do {
+            System.out.print((i + 1) + ". tárgyaló neve: ");
+            name = scanner.nextLine();
+            if (name.isBlank()) {
+                System.out.println("A név nem lehet üres!");
+            }
+//            for (MeetingRoom mr: office.getMeetingRooms()) {
+//                if (mr.getName().equals(name)) {
+//                    System.out.println("Ez a név már létezik, válassz másikat: " + name);
+//                    name = "";
+//                }
+//            }
+        } while (name.isBlank());
+        return name;
+    }
+
+    private int getLengthOfMeetingRoom(int i) {
+        Integer lengthOfMeetingRoom;
+        do {
+            System.out.print((i + 1) + ". tárgyaló hossza: ");
+            String lengthStr = scanner.nextLine();
+            lengthOfMeetingRoom = getLength(lengthStr);
+        } while (lengthOfMeetingRoom == null || lengthOfMeetingRoom < MIN_LENGTH_OF_MEETING_ROOM);
+        return lengthOfMeetingRoom;
+    }
+
+    private Integer getLength(String lengthStr) {
+        Integer lengthOfMeetingRoom = null;
+        try {
+            lengthOfMeetingRoom = Integer.parseInt(lengthStr);
+            if (lengthOfMeetingRoom < MIN_LENGTH_OF_MEETING_ROOM) {
+                System.out.println("A tárgyaló hossza nem lehet 2-nél kisebb: " + lengthOfMeetingRoom);
+            }
+            return Integer.parseInt(lengthStr);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Hiba, ez nem szám! '" + lengthStr + "'");
+        }
+        return lengthOfMeetingRoom;
+    }
+
+    private int getWidthOfMeetingRoom(int i) {
+        Integer widthOfMeetingRoom;
+        do {
+            System.out.print((i + 1) + ". tárgyaló szélessége: ");
+            String widthStr = scanner.nextLine();
+            widthOfMeetingRoom = getWidth(widthStr);
+        } while (widthOfMeetingRoom == null || widthOfMeetingRoom < MIN_WIDTH_OF_MEETING_ROOM);
+        return widthOfMeetingRoom;
+    }
+
+    private Integer getWidth(String widthStr) {
+        Integer widthOfMeetingRoom = null;
+        try {
+            widthOfMeetingRoom = Integer.parseInt(widthStr);
+            if (widthOfMeetingRoom < MIN_WIDTH_OF_MEETING_ROOM) {
+                System.out.println("A tárgyaló szélesssége nem lehet 2-nél kisebb: " + widthOfMeetingRoom);
+            }
+            return Integer.parseInt(widthStr);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Hiba, ez nem szám! '" + widthStr + "'");
+        }
+        return widthOfMeetingRoom;
+    }
+
+
 
 
 }
