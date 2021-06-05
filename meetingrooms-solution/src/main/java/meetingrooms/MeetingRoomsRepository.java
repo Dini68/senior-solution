@@ -6,5 +6,11 @@ public interface MeetingRoomsRepository {
 
     void save(String name, int width, int length);
 
-    List<MeetingRoom> findAll();
+    List<MeetingRoom> meetingRooms();
+
+    List<String> meetingRoomsOrderByName();
+
+    List<String> meetingRoomsOrderByNameReverse();
+
+    void areas();
 }

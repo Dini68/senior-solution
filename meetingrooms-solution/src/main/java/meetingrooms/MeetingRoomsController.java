@@ -69,17 +69,31 @@ public class MeetingRoomsController {
             case "0" : {
                 addMeetingRooms();                
             }
+            case "1" : {
+                System.out.println(meetingRoomsService.meetingRoomsOrderByName());
+//                List<String> meetingRooms = meetingRoomsService.meetingRoomsOrderByName();
+//                for (String s: meetingRooms) {
+//                    System.out.println(s);
+//                }
+                return;
+            }
+            case "2" : {
+                System.out.println(meetingRoomsService.meetingRoomsOrderByNameReverse());
+//                List<String> meetingRooms = meetingRoomsService.meetingRoomsOrderByNameReverse();
+//                for (String s: meetingRooms) {
+//                    System.out.println(s);
+//                }
+                return;
+            }
+            case "3" : {
+                System.out.println(meetingRoomsService.meetingRooms());
+                System.out.println(meetingRoomsService.printEvenNames());
+                return;
+            }
+
         }
         
         
-//            case "1" : {
-//                office.printNames();
-//                return;
-//            }
-//            case "2" : {
-//                office.printNamesReverse();
-//                return;
-//            }
 //            case "3" : {
 //                office.printEvenNames();
 //                return;
@@ -111,7 +125,6 @@ public class MeetingRoomsController {
             int length = getLengthOfMeetingRoom(i);
             meetingRoomsService.save(name, width, length);
         }
-        System.out.println(meetingRoomsService.meetingRooms());
     }
 
     private int getNumberOfMeetingRoom() {
